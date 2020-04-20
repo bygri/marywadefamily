@@ -25,4 +25,4 @@ RUN apt-get update -qq && apt-get install -y \
 WORKDIR /var/www/html
 COPY --from=builder /release ./
 RUN chmod -R a+rw files application/logs/errors.log \
-  webtrees/data/cache webtrees/data/media webtrees/data/tmp
+  webtrees/data/cache webtrees/data/media webtrees/data/tmp webtrees/data/html_purifier_cache
