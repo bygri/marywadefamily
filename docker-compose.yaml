@@ -1,0 +1,22 @@
+version: "3"
+services:
+  www:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - 8000:80
+    volumes:
+      # Mount test secrets
+      - ./test_secrets/omeka/db.ini:/var/www/html/db.ini:ro
+      - ./test_secrets/omeka/config.ini:/var/www/html/application/config.ini:ro
+      - ./test_secrets/webtrees/config.ini.php:/var/www/html/webtrees/data/config.ini.php:ro
+  db:
+    image: mariadb/server:10.3
+    volumes:
+      - ./test_secrets/fixtures.sql:/docker-entrypoint-initdb.d/test_fixtures.sql
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: marywade
+      MARIADB_PASSWORD: marywade
+      MARIADB_DATABASE: marywade
