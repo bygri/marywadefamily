@@ -14,12 +14,12 @@ RUN mv webtrees /release/
 COPY ./omeka /release
 COPY ./webtrees /release/webtrees
 
-FROM php:7.2-apache
+FROM php:7.4-apache
 RUN apt-get update -qq && apt-get install -y \
   libpng-dev libjpeg-dev libfreetype6-dev \
   default-libmysqlclient-dev \
   && rm -r /var/lib/apt/lists/* \
-  && docker-php-ext-configure gd --with-freetype-dir=/usr/include --with-jpeg-dir=/usr/include \
+  && docker-php-ext-configure gd --with-freetype --with-jpeg \
   && docker-php-ext-install exif gd mysqli pdo_mysql \
   && a2enmod rewrite
 WORKDIR /var/www/html
