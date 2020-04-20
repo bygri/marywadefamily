@@ -9,7 +9,7 @@ services:
     volumes:
       # Mount test secrets
       - ./test_secrets/omeka/db.ini:/var/www/html/db.ini:ro
-      - ./test_secrets/omeka/config.ini:/var/www/html/application/config.ini:ro
+      - ./test_secrets/omeka/config.ini:/var/www/html/application/config/config.ini:ro
       - ./test_secrets/webtrees/config.ini.php:/var/www/html/webtrees/data/config.ini.php:ro
   db:
     image: mariadb/server:10.3

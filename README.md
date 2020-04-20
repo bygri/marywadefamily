@@ -10,21 +10,24 @@ Login to both Omeka and Webtrees with username `test` and password `password`.
 
 ## Deploying
 
-The following secrets files need to be mounted into the container.
-Use the contents of `test_secrets` as a guide, but edit with your
-production configuration.
-
-- `omeka/db.ini`: `/var/www/html/db.ini`
-- `omeka/config.ini`: `/var/www/html/application/config.ini`
-- `webtrees/config.ini.php`: `var/www/html/webtrees/data/config.ini.php`
-
 It is recommended to mount the following paths into permanent volumes.
 
 - `/var/www/html/files` (Omeka storage)
 - `/var/www/html/data/media` (Webtrees storage)
 
-After installation, Omeka needs to have the ImageMagick path set to `/usr/bin`.
-You can do this using the Settings tab in Omeka admin.
+The following secrets files need to be mounted into the container.
+Use the contents of `test_secrets` as a guide, but edit with your
+production configuration.
+
+- `omeka/db.ini`: `/var/www/html/db.ini`
+- `omeka/config.ini`: `/var/www/html/application/config/config.ini`
+- `webtrees/config.ini.php`: `var/www/html/webtrees/data/config.ini.php`
+
+In these files, Omeka is configured to use GD rather than ImageMagick
+(the default). If you want to use ImageMagick, then you will need to
+add `apt-get install imagemagick` to the image, and then after installation,
+set the ImageMagick path to `/usr/bin` in the Settings tab in the Omeka
+admin console.
 
 ## Development
 
