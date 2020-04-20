@@ -21,7 +21,7 @@ production configuration.
 
 - `omeka/db.ini`: `/var/www/html/db.ini`
 - `omeka/config.ini`: `/var/www/html/application/config/config.ini`
-- `webtrees/config.ini.php`: `var/www/html/webtrees/data/config.ini.php`
+- `webtrees/config.ini.php`: `/var/www/html/webtrees/data/config.ini.php`
 
 In these files, Omeka is configured to use GD rather than ImageMagick
 (the default). If you want to use ImageMagick, then you will need to
