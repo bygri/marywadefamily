@@ -29,10 +29,9 @@ add `apt-get install imagemagick` to the image, and then after installation,
 set the ImageMagick path to `/usr/bin` in the Settings tab in the Omeka
 admin console.
 
-Apache serves HTTP. If deploying behind SSL, make sure to set `LOGIN_URL`
-to an HTTPS url, e.g. `https://www.marywadefamily.org/webtrees/login.php`.
-This can be done in the `wt_site_setting` table, or via Webtrees'
-Control Panel.
+Apache serves HTTP. If deploying behind SSL, make sure to set the `base_url`
+in secret `webtrees/config.ini.php` to an HTTPS url, e.g. 
+`https://www.marywadefamily.org/webtrees/login.php`.
 
 ## Development
 
