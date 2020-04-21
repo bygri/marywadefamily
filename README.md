@@ -44,3 +44,7 @@ Custom files, such as themes, plugins or application logic overrides,
 should be placed in the `omeka` or `webtrees` directories. As noted above,
 they will be added into the release folder structure, overwriting
 any existing files.
+
+### Installed plugins
+
+- OmekaGoogleAnalytics, [DigitalCarleton's fork](https://github.com/DigitalCarleton/OmekaGoogleAnalytics/commit/51a3764).
