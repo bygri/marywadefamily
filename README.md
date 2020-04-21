@@ -13,7 +13,7 @@ Login to both Omeka and Webtrees with username `test` and password `password`.
 It is recommended to mount the following paths into permanent volumes.
 
 - `/var/www/html/files` (Omeka storage)
-- `/var/www/html/data/media` (Webtrees storage)
+- `/var/www/html/data` (Webtrees storage)
 
 The following secrets files need to be mounted into the container.
 Use the contents of `test_secrets` as a guide, but edit with your
