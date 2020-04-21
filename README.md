@@ -48,3 +48,4 @@ any existing files.
 ### Installed plugins
 
 - OmekaGoogleAnalytics, [DigitalCarleton's fork](https://github.com/DigitalCarleton/OmekaGoogleAnalytics/commit/51a3764).
+- Sitemap 2, [UC Santa Cruz University Library](https://github.com/UCSCLibrary/Sitemap)
