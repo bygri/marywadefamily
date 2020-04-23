@@ -30,7 +30,7 @@ set the ImageMagick path to `/usr/bin` in the Settings tab in the Omeka
 admin console.
 
 Apache serves HTTP. If deploying behind SSL, make sure to set the `base_url`
-in secret `webtrees/config.ini.php` to an HTTPS url, e.g. 
+in secret `webtrees/config.ini.php` to an HTTPS url, e.g.
 `https://www.marywadefamily.org/webtrees/login.php`.
 
 ## Development
@@ -47,5 +47,6 @@ any existing files.
 
 ### Installed plugins
 
-- OmekaGoogleAnalytics, [DigitalCarleton's fork](https://github.com/DigitalCarleton/OmekaGoogleAnalytics/commit/51a3764).
-- Sitemap 2, [UC Santa Cruz University Library](https://github.com/UCSCLibrary/Sitemap)
+- [OmekaGoogleAnalytics](https://github.com/DigitalCarleton/OmekaGoogleAnalytics/commit/51a3764), DigitalCarleton's fork.
+- [Sitemap 2](https://github.com/UCSCLibrary/Sitemap) v2.3, UC Santa Cruz University Library
+- [PDF Embed](https://github.com/zerocrates/PdfEmbed) v1.0.1, John Flatness
