@@ -4,7 +4,7 @@ RUN apk add --no-cache curl
 WORKDIR /build
 # Fetch applications
 RUN curl -LO https://github.com/omeka/Omeka/releases/download/v2.7.1/omeka-2.7.1.zip \
-  -O https://github.com/fisharebest/webtrees/releases/download/2.0.6/webtrees-2.0.6.zip
+  -O https://github.com/fisharebest/webtrees/releases/download/2.0.7/webtrees-2.0.7.zip
 RUN for z in *.zip; do unzip $z; done
 RUN rm *.zip
 # Move to release folder structure
