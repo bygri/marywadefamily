@@ -12,11 +12,11 @@ services:
       - ./test_secrets/omeka/config.ini:/var/www/html/application/config/config.ini:ro
       - ./test_secrets/webtrees/config.ini.php:/var/www/html/webtrees/data/config.ini.php:ro
   db:
-    image: mariadb/server:10.3
+    image: mariadb:10.5
     volumes:
       - ./test_secrets/fixtures.sql:/docker-entrypoint-initdb.d/test_fixtures.sql
     environment:
-      MARIADB_ROOT_PASSWORD: root
-      MARIADB_USER: marywade
-      MARIADB_PASSWORD: marywade
-      MARIADB_DATABASE: marywade
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: marywade
+      MYSQL_PASSWORD: marywade
+      MYSQL_DATABASE: marywade
