@@ -47,6 +47,7 @@ any existing files.
 
 ### Installed plugins
 
-- [OmekaGoogleAnalytics](https://github.com/DigitalCarleton/OmekaGoogleAnalytics/commit/51a3764), DigitalCarleton's fork.
-- [Sitemap 2](https://github.com/UCSCLibrary/Sitemap) v2.3, UC Santa Cruz University Library
+- [OmekaGoogleAnalytics](https://github.com/DigitalCarleton/OmekaGoogleAnalytics/commit/51a3764), DigitalCarleton's fork
 - [PDF Embed](https://github.com/zerocrates/PdfEmbed) v1.0.1, John Flatness
+- [SimpleContactForm](https://github.com/omeka/plugin-SimpleContactForm) v0.6, Roy Rosenzweig Center for History & New Media
+- [Sitemap 2](https://github.com/UCSCLibrary/Sitemap) v2.3, UC Santa Cruz University Library
