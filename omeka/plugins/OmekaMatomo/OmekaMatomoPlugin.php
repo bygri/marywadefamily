@@ -33,7 +33,7 @@ class OmekaMatomoPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $websiteId = get_option(MATOMO_WEBSITE_ID);
         $url = get_option(MATOMO_URL);
-        if (empty($accountId) || empty($url)) {
+        if (empty($websiteId) || empty($url)) {
             return;
         }
 
