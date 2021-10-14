@@ -8,12 +8,7 @@ jQuery(document).ready(function () {
 </script>
 
 <?php
-$reply_from_email                        = get_option('simple_contact_form_reply_from_email');
 $forward_to_email                        = get_option('simple_contact_form_forward_to_email');	
-$admin_notification_email_subject        = get_option('simple_contact_form_admin_notification_email_subject');
-$admin_notification_email_message_header = get_option('simple_contact_form_admin_notification_email_message_header');
-$user_notification_email_subject         = get_option('simple_contact_form_user_notification_email_subject');
-$user_notification_email_message_header  = get_option('simple_contact_form_user_notification_email_message_header');
 $contact_page_title                      = get_option('simple_contact_form_contact_page_title');
 $contact_page_instructions               = get_option('simple_contact_form_contact_page_instructions');
 $thankyou_page_title                     = get_option('simple_contact_form_thankyou_page_title');
@@ -24,96 +19,35 @@ $view = get_view();
 ?>
 
 <?php if (!Omeka_Captcha::isConfigured()): ?>
-    <p class="alert">You have not entered your <a href="http://www.google.com/recaptcha/intro/index.html/">reCAPTCHA</a>
-        API keys under <a href="<?php echo url('settings/edit-security#fieldset-captcha'); ?>">security settings</a>. We recommend adding these keys, or the contact form will be vulnerable to spam.</p>
+    <p class="alert">
+        <?php
+        echo __('You have not entered your <a href="%1$s">reCAPTCHA</a> API keys under <a href="%2$s">security settings</a>. We recommend adding these keys, or the contact form will be vulnerable to spam.',
+            'http://www.google.com/recaptcha/intro/index.html/',
+            url('settings/edit-security#fieldset-captcha')
+        );
+        ?>
+	</p>
 <?php endif; ?>
 
 <div class="field">
     <div class="two columns alpha">
-    <?php echo $view->formLabel('reply_from_email', 'Reply-From Email'); ?>
+        <?php echo $view->formLabel('forward_to_email', __('Forward-To Email')); ?>
     </div>
     <div class="inputs five columns omega">
         <p class="explanation">
-            The address that users can reply to. If blank, your users will not
-            be sent confirmation emails of their submissions.
-        </p>
-        <?php echo $view->formText('reply_from_email', $reply_from_email); ?>
-    </div>
-</div>
-
-<div class="field">
-    <div class="two columns alpha">
-        <?php echo $view->formLabel('forward_to_email', 'Forward-To Email'); ?>
-    </div>
-    <div class="inputs five columns omega">
-        <p class="explanation">
-            The email address that receives notifications that someone has
-            submitted a message through the contact form. If blank, you will not
-            be forwarded messages from your users.
+            <?php echo __('The email address that receives notifications that someone has submitted a message through the contact form. If blank, you will not be forwarded messages from your users.'); ?>
         </p>
         <?php echo $view->formText('forward_to_email', $forward_to_email); ?>
     </div>
 </div>
 
- <div class="field">
-    <div class="two columns alpha">
-        <?php echo $view->formLabel('admin_notification_email_subject', 'Email Subject (Admin Notification)'); ?>
-    </div>
-    <div class="inputs five columns omega">
-        <p class="explanation">
-            The subject line for the email that is sent to the Forward-To email
-            address.
-        </p>
-        <?php echo $view->formText('admin_notification_email_subject', $admin_notification_email_subject); ?>
-    </div>
-</div>
-
- <div class="field">
-    <div class="two columns alpha">
-        <?php echo $view->formLabel('admin_notification_email_message_header', 'Email Message (Admin Notification)'); ?>
-    </div>
-    <div class="inputs five columns omega">
-        <p class="explanation">
-            The beginning of the message that is sent to the Forward-To email
-            address.
-        </p>
-        <?php echo $view->formTextarea('admin_notification_email_message_header', $admin_notification_email_message_header, array('rows' => '10', 'cols' => '60')); ?>
-    </div>
-</div>
-
- <div class="field">
-    <div class="two columns alpha">
-        <?php echo $view->formLabel('user_notification_email_subject', 'Email Subject (Public Notification)'); ?>
-    </div>
-    <div class="inputs five columns omega">
-        <p class="explanation">
-            The subject line of the confirmation email that is sent
-            to users who post messages through the form.
-        </p>
-        <?php echo $view->formText('user_notification_email_subject', $user_notification_email_subject); ?>
-    </div>
-</div>
-
- <div class="field">
-    <div class="two columns alpha">
-        <?php echo $view->formLabel('user_notification_email_message_header', 'Email Message (Public Notification)'); ?>
-    </div>
-    <div class="inputs five columns omega">
-        <p class="explanation">
-            The beginning of the confirmation email that is sent to
-            users who post messages through the form.
-        </p>
-        <?php echo $view->formTextarea('user_notification_email_message_header', $user_notification_email_message_header, array('rows' => '10', 'cols' => '60')); ?>
-    </div>
-</div>
-
 <div class="field">
     <div class="two columns alpha">
-        <?php echo $view->formLabel('contact_page_title', 'Contact Page Title'); ?>
+        <?php echo $view->formLabel('contact_page_title', __('Contact Page Title')); ?>
     </div>
     <div class="inputs five columns omega">
         <p class="explanation">
-            The title of the contact form (not HTML).
+            <?php echo __('The title of the contact form (not HTML).') ?>
         </p>
         <?php echo $view->formText('contact_page_title', $contact_page_title); ?>
     </div>
@@ -121,11 +55,11 @@ $view = get_view();
 
 <div class="field">
     <div class="two columns alpha">
-        <?php echo $view->formLabel('contact_page_instructions', 'Instructions for Contact Page'); ?>
+        <?php echo $view->formLabel('contact_page_instructions', __('Instructions for Contact Page')); ?>
     </div>
     <div class="inputs five columns omega">
         <p class="explanation">
-            Any specific instructions to add to the contact form.
+            <?php echo __('Any specific instructions to add to the contact form.'); ?>
         </p>
         <?php echo $view->formTextarea('contact_page_instructions', $contact_page_instructions, array('rows' => '10', 'cols' => '60', 'class' => array('html-editor'))); ?>
     </div>
@@ -133,12 +67,11 @@ $view = get_view();
 
 <div class="field">
     <div class="two columns alpha">
-        <?php echo $view->formLabel('add_to_main_navigation', 'Add to Main Navigation'); ?>
+        <?php echo $view->formLabel('add_to_main_navigation', __('Add to Main Navigation')); ?>
     </div>
     <div class="inputs five columns omega">
         <p class="explanation">
-            If checked, add a link to the contact form to the main site
-            navigation.
+            <?php echo __('If checked, add a link to the contact form to the main site navigation.'); ?>
         </p>
         <?php echo $view->formCheckbox('add_to_main_navigation', $add_to_main_navigation, null, array('1', '0')); ?>
     </div>
@@ -146,11 +79,11 @@ $view = get_view();
 
 <div class="field">
     <div class="two columns alpha">
-        <?php echo $view->formLabel('thankyou_page_title', 'Thank You Page Title'); ?>
+        <?php echo $view->formLabel('thankyou_page_title', __('Thank You Page Title')); ?>
     </div>
     <div class="inputs five columns omega">
         <p class="explanation">
-            The title of the Thank You page (not HTML).
+            <?php echo __('The title of the Thank You page (not HTML).'); ?>
         </p>
         <?php echo $view->formText('thankyou_page_title', $thankyou_page_title); ?>
     </div>
@@ -158,11 +91,11 @@ $view = get_view();
 
 <div class="field">
     <div class="two columns alpha">
-        <?php echo $view->formLabel('thankyou_page_message', 'Thank You Page Message'); ?>
+        <?php echo $view->formLabel('thankyou_page_message', __('Thank You Page Message')); ?>
     </div>
     <div class="inputs five columns omega">
         <p class="explanation">
-            The text displayed on the Thank You page.
+            <?php echo __('The text displayed on the Thank You page.'); ?>
         </p>
         <?php echo $view->formTextarea('thankyou_page_message', $thankyou_page_message, array('rows' => '10', 'cols' => '60', 'class' => array('html-editor'))); ?>
     </div>
