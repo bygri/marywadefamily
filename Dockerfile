@@ -3,8 +3,8 @@ FROM alpine AS builder
 RUN apk add --no-cache curl
 WORKDIR /build
 # Fetch applications
-RUN curl -LO https://github.com/omeka/Omeka/releases/download/v3.0.1/omeka-3.0.1.zip \
-  -O https://github.com/fisharebest/webtrees/releases/download/2.0.17/webtrees-2.0.17.zip
+RUN curl -LO https://github.com/omeka/Omeka/releases/download/v3.0.2/omeka-3.0.2.zip \
+  -O https://github.com/fisharebest/webtrees/releases/download/2.0.19/webtrees-2.0.19.zip
 RUN for z in *.zip; do unzip $z; done
 RUN rm *.zip
 # Move to release folder structure
