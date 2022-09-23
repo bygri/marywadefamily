@@ -2,6 +2,7 @@
 
 /**
  * Modified 4/3/22 by TG: extend inactive threshold to 12 months
+ * Current to 8cfb5e7
  */
 
 /**
@@ -24,9 +25,9 @@ declare(strict_types=1);
 namespace Fisharebest\Webtrees\Services;
 
 use Fisharebest\Webtrees\Auth;
-use Fisharebest\Webtrees\Carbon;
 use Fisharebest\Webtrees\Contracts\UserInterface;
 use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Registry;
 use Fisharebest\Webtrees\SiteUser;
 use Fisharebest\Webtrees\Tree;
 use Fisharebest\Webtrees\User;
@@ -42,11 +43,20 @@ use function view;
  */
 class MessageService
 {
-    /** @var UserService */
-    private $user_service;
+    // Users can be contacted by various methods
+    public const CONTACT_METHOD_INTERNAL           = 'messaging';
+    public const CONTACT_METHOD_INTERNAL_AND_EMAIL = 'messaging2';
+    public const CONTACT_METHOD_EMAIL              = 'messaging3';
+    public const CONTACT_METHOD_MAILTO             = 'mailto';
+    public const CONTACT_METHOD_NONE               = 'none';
 
-    /** @var EmailService */
-    private $email_service;
+    private const BROADCAST_ALL   = 'all';
+    private const BROADCAST_NEVER = 'never';
+    private const BROADCAST_GONE  = 'gone';
+
+    private EmailService $email_service;
+
+    private UserService $user_service;
 
     /**
      * MessageService constructor.
@@ -65,7 +75,7 @@ class MessageService
      *
      * @param Tree $tree
      *
-     * @return UserInterface[]
+     * @return array<UserInterface>
      */
     public function validContacts(Tree $tree): array
     {
@@ -149,10 +159,10 @@ class MessageService
     public function sendInternalMessage(UserInterface $user): bool
     {
         return in_array($user->getPreference(UserInterface::PREF_CONTACT_METHOD), [
-            'messaging',
-            'messaging2',
-            'mailto',
-            'none',
+            self::CONTACT_METHOD_INTERNAL,
+            self::CONTACT_METHOD_INTERNAL_AND_EMAIL,
+            self::CONTACT_METHOD_MAILTO,
+            self::CONTACT_METHOD_NONE,
         ], true);
     }
 
@@ -166,10 +176,10 @@ class MessageService
     public function sendEmail(UserInterface $user): bool
     {
         return in_array($user->getPreference(UserInterface::PREF_CONTACT_METHOD), [
-            'messaging2',
-            'messaging3',
-            'mailto',
-            'none',
+            MessageService::CONTACT_METHOD_INTERNAL_AND_EMAIL,
+            MessageService::CONTACT_METHOD_EMAIL,
+            self::CONTACT_METHOD_MAILTO,
+            self::CONTACT_METHOD_NONE,
         ], true);
     }
 
@@ -178,20 +188,20 @@ class MessageService
      *
      * @param string $to
      *
-     * @return Collection<User>
+     * @return Collection<int,User>
      */
     public function recipientUsers(string $to): Collection
     {
         switch ($to) {
             default:
-            case 'all':
+            case self::BROADCAST_ALL:
                 return $this->user_service->all();
-            case 'never_logged':
+            case self::BROADCAST_NEVER:
                 return $this->user_service->all()->filter(static function (UserInterface $user): bool {
                     return $user->getPreference(UserInterface::PREF_IS_ACCOUNT_APPROVED) === '1' && $user->getPreference(UserInterface::PREF_TIMESTAMP_REGISTERED) > $user->getPreference(UserInterface::PREF_TIMESTAMP_ACTIVE);
                 });
-            case 'last_6mo':
-                $twelve_months_ago = Carbon::now()->subMonths(12)->unix();
+            case self::BROADCAST_GONE:
+                $twelve_months_ago = Registry::timestampFactory()->now()->subtractMonths(12)->timestamp();
 
                 return $this->user_service->all()->filter(static function (UserInterface $user) use ($twelve_months_ago): bool {
                     $session_time = (int) $user->getPreference(UserInterface::PREF_TIMESTAMP_ACTIVE);
@@ -202,21 +212,17 @@ class MessageService
     }
 
     /**
-     * @param string $to
+     * Recipients for broadcast messages
      *
-     * @return string
+     * @return array<string,string>
      */
-    public function recipientDescription(string $to): string
+    public function recipientTypes(): array
     {
-        switch ($to) {
-            default:
-            case 'all':
-                return I18N::translate('Send a message to all users');
-            case 'never_logged':
-                return I18N::translate('Send a message to users who have never signed in');
-            case 'last_6mo':
-                return I18N::translate('Send a message to users who have not signed in for 12 months');
-        }
+        return [
+            self::BROADCAST_ALL   => I18N::translate('Send a message to all users'),
+            self::BROADCAST_NEVER => I18N::translate('Send a message to users who have never signed in'),
+            self::BROADCAST_GONE  => I18N::translate('Send a message to users who have not signed in for 12 months'),
+        ];
     }
 
     /**
@@ -227,11 +233,11 @@ class MessageService
     public function contactMethods(): array
     {
         return [
-            'messaging'  => I18N::translate('Internal messaging'),
-            'messaging2' => I18N::translate('Internal messaging with emails'),
-            'messaging3' => I18N::translate('webtrees sends emails with no storage'),
-            'mailto'     => I18N::translate('Mailto link'),
-            'none'       => I18N::translate('No contact'),
+            self::CONTACT_METHOD_INTERNAL           => I18N::translate('Internal messaging'),
+            self::CONTACT_METHOD_INTERNAL_AND_EMAIL => I18N::translate('Internal messaging with emails'),
+            self::CONTACT_METHOD_EMAIL              => I18N::translate('webtrees sends emails with no storage'),
+            self::CONTACT_METHOD_MAILTO             => I18N::translate('Mailto link'),
+            self::CONTACT_METHOD_NONE               => I18N::translate('No contact'),
         ];
     }
 }

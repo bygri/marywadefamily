@@ -2,7 +2,10 @@
 
 /**
  * Modified 4/3/22 by TG: extend inactive threshold to 12 months
+ * Current to 5bfc689
  */
+
+<?php
 
 /**
  * webtrees: online genealogy
@@ -23,9 +26,9 @@ declare(strict_types=1);
 
 namespace Fisharebest\Webtrees\Http\RequestHandlers;
 
-use Fisharebest\Webtrees\Carbon;
 use Fisharebest\Webtrees\Http\ViewResponseTrait;
 use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Registry;
 use Fisharebest\Webtrees\Services\UserService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -38,8 +41,7 @@ class UsersCleanupPage implements RequestHandlerInterface
 {
     use ViewResponseTrait;
 
-    /** @var UserService */
-    private $user_service;
+    private UserService $user_service;
 
     /**
      * @param UserService $user_service
@@ -56,8 +58,8 @@ class UsersCleanupPage implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $inactive_threshold   = Carbon::now()->subMonths(12)->getTimestamp();
-        $unverified_threshold = Carbon::now()->subDays(7)->getTimestamp();
+        $inactive_threshold   = Registry::timestampFactory()->now()->subtractMonths(12)->timestamp();
+        $unverified_threshold = Registry::timestampFactory()->now()->subtractDays(7)->timestamp();
 
         $inactive_users = $this->user_service->all()
             ->filter($this->user_service->filterInactive($inactive_threshold))
