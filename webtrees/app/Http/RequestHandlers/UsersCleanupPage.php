@@ -5,8 +5,6 @@
  * Current to 5bfc689
  */
 
-<?php
-
 /**
  * webtrees: online genealogy
  * Copyright (C) 2022 webtrees development team
