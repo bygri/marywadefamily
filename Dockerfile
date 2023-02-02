@@ -10,9 +10,6 @@ RUN rm *.zip
 # Move to release folder structure
 RUN mv omeka-* /release
 RUN mv webtrees /release/
-# Bring in additional files
-COPY ./omeka /release
-COPY ./webtrees /release/webtrees
 
 FROM php:7.4-apache
 RUN apt-get update -qq && apt-get install -y \
@@ -27,5 +24,8 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY php.ini $PHP_INI_DIR/conf.d/
 WORKDIR /var/www/html
 COPY --from=builder /release ./
+# Bring in additional files
+COPY ./omeka ./
+COPY ./webtrees ./webtrees
 RUN chmod -R a+rw files application/logs/errors.log \
   webtrees/data
