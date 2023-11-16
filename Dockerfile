@@ -3,15 +3,15 @@ FROM alpine AS builder
 RUN apk add --no-cache curl
 WORKDIR /build
 # Fetch applications
-RUN curl -LO https://github.com/omeka/Omeka/releases/download/v3.1/omeka-3.1.zip \
-  -O https://github.com/fisharebest/webtrees/releases/download/2.1.16/webtrees-2.1.16.zip
+RUN curl -LO https://github.com/omeka/Omeka/releases/download/v3.1.2/omeka-3.1.2.zip \
+  -O https://github.com/fisharebest/webtrees/releases/download/2.1.18/webtrees-2.1.18.zip
 RUN for z in *.zip; do unzip $z; done
 RUN rm *.zip
 # Move to release folder structure
 RUN mv omeka-* /release
 RUN mv webtrees /release/
 
-FROM php:7.4-apache
+FROM php:8.2-apache
 RUN apt-get update -qq && apt-get install -y \
   libpng-dev libjpeg-dev libfreetype6-dev \
   libicu-dev libzip-dev \

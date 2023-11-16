@@ -2,12 +2,12 @@
 
 /**
  * Modified 4/3/22 by TG: extend inactive threshold to 12 months
- * Current to 5bfc689
+ * Current to 7fcbe9f
  */
 
 /**
  * webtrees: online genealogy
- * Copyright (C) 2022 webtrees development team
+ * Copyright (C) 2023 webtrees development team
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
