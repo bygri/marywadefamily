@@ -47,7 +47,7 @@ any existing files.
 
 ### Installed plugins
 
-- [PDF Embed](https://github.com/zerocrates/PdfEmbed) v1.0.1, John Flatness
+- [PDF Embed](https://github.com/zerocrates/PdfEmbed) v1.2, John Flatness
 - [SimpleContactForm](https://github.com/omeka/plugin-SimpleContactForm) v1.1.1, Roy Rosenzweig Center for History & New Media
 - [Sitemap 2](https://github.com/UCSCLibrary/Sitemap) v2.3, UC Santa Cruz University Library
 - OmekaMatomo, by Toby Griffin
