@@ -11,7 +11,7 @@ RUN rm *.zip
 RUN mv omeka-* /release
 RUN mv webtrees /release/
 
-FROM php:8.2-apache
+FROM php:8.3-apache
 RUN apt-get update -qq && apt-get install -y \
   libpng-dev libjpeg-dev libfreetype6-dev \
   libicu-dev libzip-dev \
