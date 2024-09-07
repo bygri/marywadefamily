@@ -12,6 +12,6 @@ def docker_build(c):
     tag_name = c.run("git rev-parse --short HEAD").stdout[:-1]
     image_name = DOCKER_REPO_NAME + ":" + tag_name
     c.run(
-        "docker buildx build --platform linux/amd64 "
+        "docker buildx build --platform 'linux/amd64,linux/arm64' "
         "--push -t {} .".format(image_name)
     )
