@@ -52,3 +52,4 @@ any existing files.
 - [Sitemap 2](https://github.com/UCSCLibrary/Sitemap) v2.3, UC Santa Cruz University Library
 - FileDownload, by Toby Griffin
 - OmekaMatomo, by Toby Griffin
+- OmekaUmami, by Toby Griffin
